@@ -1,0 +1,234 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 14px 0;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+
+  &.scrolled {
+    background: rgba(10, 10, 15, 0.98);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  &__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    flex-shrink: 0;
+
+    .logo-icon { font-size: 22px; }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      white-space: nowrap;
+
+      span { color: var(--accent-red); }
+    }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    // flex: 1 NAHI — sirf apni zaroorat ki jagah le
+    
+    li a {
+      padding: 7px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      white-space: nowrap;
+
+      &:hover {
+        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      &.active {
+        color: var(--accent-red);
+        background: rgba(230, 57, 70, 0.08);
+      }
+    }
+  }
+
+  // Yeh spacer baaki jagah fill karega
+  &__spacer {
+    flex: 1;
+  }
+
+  &__auth {
+    flex-shrink: 0;
+
+    .auth-btns {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+  }
+
+  &__user {
+    position: relative;
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.3);
+      }
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      min-width: 200px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: var(--transition);
+      box-shadow: var(--shadow-card);
+
+      .user-info {
+        padding: 10px 12px 12px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 8px;
+
+        .user-name {
+          display: block;
+          font-weight: 600;
+          font-size: 14px;
+        }
+
+        .user-role {
+          display: block;
+          font-size: 12px;
+          color: var(--text-secondary);
+          text-transform: capitalize;
+          margin-top: 2px;
+        }
+      }
+
+      .dropdown-links {
+        display: flex;
+        flex-direction: column;
+
+        a {
+          padding: 8px 12px;
+          border-radius: var(--radius-sm);
+          font-size: 13px;
+          color: var(--text-secondary);
+          transition: var(--transition);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+          }
+        }
+      }
+
+      .logout-btn {
+        width: 100%;
+        margin-top: 8px;
+        padding: 9px 12px;
+        background: rgba(230, 57, 70, 0.1);
+        color: var(--accent-red);
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        transition: var(--transition);
+        border-top: 1px solid var(--border);
+
+        &:hover { background: rgba(230, 57, 70, 0.2); }
+      }
+    }
+
+    &:hover .user-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px;
+    margin-left: auto;
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    &__toggle { display: flex; }
+
+    &__links {
+      display: none;
+
+      &.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        align-items: flex-start;
+        z-index: 999;
+      }
+    }
+
+    &__spacer { display: none; }
+
+    &__auth {
+      .auth-btns { display: none; }
+    }
+  }
+}

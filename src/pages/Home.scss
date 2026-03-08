@@ -1,0 +1,219 @@
+.home {
+  min-height: 100vh;
+}
+
+// ===================== HERO =====================
+.hero {
+  margin-top: -64px; // body padding-top compensate karo — hero full screen hoga
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-secondary);
+  display: flex;
+  align-items: flex-end;
+
+  // Navbar ke upar se start hota hai
+  padding-top: 70px;
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(10, 10, 15, 0.95) 0%,
+      rgba(10, 10, 15, 0.6) 60%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to top,
+      var(--bg-primary) 0%,
+      transparent 40%
+    );
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 80px;
+    max-width: 640px;
+    animation: fadeInUp 0.6s ease;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(230, 57, 70, 0.15);
+    border: 1px solid rgba(230, 57, 70, 0.3);
+    color: var(--accent-red);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  &__overview {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+
+    .hero-btn {
+      font-size: 15px;
+      padding: 13px 28px;
+    }
+  }
+}
+
+// ===================== NO HERO fallback =====================
+// Jab hero nahi hoga (backend down / no movies), page navbar ke neeche se shuru hoga
+.home__main {
+  padding-top: 32px; // body already 64px padding-top de raha hai
+  padding-bottom: 60px;
+
+}
+
+// ===================== SEARCH =====================
+.search-section {
+  margin-bottom: 40px;
+  margin-top: 20px;
+
+  .search-bar {
+    position: relative;
+    max-width: 600px; // thoda wider
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px 52px 16px 52px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      color: var(--text-primary);
+      font-size: 15px;
+      transition: var(--transition);
+
+      &::placeholder { color: var(--text-muted); }
+
+      &:focus {
+        outline: none;
+        border-color: var(--accent-red);
+        box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+        background: rgba(22, 22, 31, 0.95);
+      }
+    }
+
+    .clear-search {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 16px;
+      transition: var(--transition);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+
+      &:hover {
+        color: var(--text-primary);
+        background: rgba(255,255,255,0.1);
+      }
+    }
+  }
+}
+
+// ===================== MOVIES =====================
+.movies-section {
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .mini-loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent-red);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 20px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+// Skeleton
+.movie-skeleton {
+  .poster-sk {
+    aspect-ratio: 2/3;
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+  }
+
+  .title-sk {
+    height: 14px;
+    border-radius: 4px;
+    width: 80%;
+    margin-bottom: 6px;
+  }
+
+  .meta-sk {
+    height: 12px;
+    border-radius: 4px;
+    width: 50%;
+  }
+}
+
+// Empty state
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+
+  span { font-size: 60px; display: block; margin-bottom: 16px; }
+  p { color: var(--text-muted); font-size: 16px; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
